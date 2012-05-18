@@ -26,4 +26,5 @@ test('listener', {
     assert.equal(typeof callback, 'function');
   }
 
+
 });

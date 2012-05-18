@@ -158,6 +158,19 @@ test('then', {
     },
 
 
+  'should not confuse argument order': function () {
+    var spy       = sinon.spy();
+
+    var callbackA = this.listener();
+    callbackA(null, false);
+    var callbackB = this.listener();
+    callbackB(null, true);
+    this.then(spy);
+
+    sinon.assert.calledWith(spy, null, [false, true]);
+  },
+
+
   'should pass error to given function': function () {
     var spy       = sinon.spy();
     var err       = new RangeError();
