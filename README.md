@@ -40,13 +40,13 @@ listener.then(function (err, values) {
 
 `listen(values)` - creates a new listener with initial values. The given argument must be an array.
 
-`listener()` - creates a new callback associated with the listener.
+`listener()` - creates a new callback associated with the listener. Throws if called after `then`.
 
-`listener.then(func)` - invokes the given function once all callbacks where invoked. Can only be called once.
+`listener.then(func)` - invokes the given function once all callbacks where invoked. Throws if already called.
 
-`listener.push(value)` - pushes a value to the internal values array.
+`listener.push(value)` - pushes a value to the internal values array. Throws if called after `then`.
 
-`listener.err(error)` - adds an error to the internal error list.
+`listener.err(error)` - adds an error to the internal error list. Throws if called after `then`.
 
 ## Run tests
 
