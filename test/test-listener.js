@@ -24,6 +24,16 @@ test('listener', {
     var callback = this.listener();
 
     assert.equal(typeof callback, 'function');
+  },
+
+
+  'should throw if called after then': function () {
+    this.listener.then(function () {});
+    var self = this;
+
+    assert.throws(function () {
+      self.listener();
+    }, /^Error: Cannot be called after then$/);
   }
 
 

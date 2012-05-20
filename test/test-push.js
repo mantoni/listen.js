@@ -41,8 +41,17 @@ test('push', {
     callback(null, 'a');
 
     sinon.assert.calledWith(spy, null, ['a', 'b']);
-  }
+  },
 
+
+  'should throw if called after then': function () {
+    this.listener.then(function () {});
+    var self = this;
+
+    assert.throws(function () {
+      self.listener.push(1);
+    }, /^Error: Cannot be called after then$/);
+  }
 
 
 });

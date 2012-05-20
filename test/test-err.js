@@ -29,6 +29,16 @@ test('err', {
     this.listener.then(spy);
 
     assert.deepEqual(spy.firstCall.args[0].errors, ['a', 'b']);
+  },
+
+
+  'should throw if called after then': function () {
+    this.listener.then(function () {});
+    var self = this;
+
+    assert.throws(function () {
+      self.listener.err();
+    }, /^Error: Cannot be called after then$/);
   }
 
 
