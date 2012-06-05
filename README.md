@@ -8,7 +8,7 @@ Wait for the results of multiple callbacks.
 
 ```
 npm install listen
-````
+```
 
 ## Usage
 
@@ -36,17 +36,12 @@ listener.then(function (err, values) {
 
 ## API
 
-`listen()` - creates a new listener.
-
-`listen(values)` - creates a new listener with initial values. The given argument must be an array.
-
-`listener()` - creates a new callback associated with the listener. Throws if called after `then`.
-
-`listener.then(func)` - invokes the given function once all callbacks where invoked. Throws if already called.
-
-`listener.push(value)` - pushes a value to the internal values array. Throws if called after `then`.
-
-`listener.err(error)` - adds an error to the internal error list. Throws if called after `then`.
+ - `listen()` - creates a new listener.
+ - `listen(values)` - creates a new listener with initial values. The given argument must be an array.
+ - `listener()` - creates a new callback associated with the listener. Throws if called after `then`.
+ - `listener.then(func)` - invokes the given function once all callbacks where invoked. Throws if already called.
+ - `listener.push(value)` - pushes a value to the internal values array. Throws if called after `then`.
+ - `listener.err(error)` - adds an error to the internal error list. Throws if called after `then`.
 
 ## Run tests
 
@@ -54,7 +49,7 @@ listener.then(function (err, values) {
 make
 ```
 
-## Compile for browsers
+## Compile for browsers and minify
 
 This requires [nomo.js](https://github.com/mantoni/nomo.js).
 
