@@ -20,7 +20,15 @@ var listener = listen();
 var callbackA = listener();
 var callbackB = listener();
 
-// ... do async stuff with callbacks
+/*
+ * Do async stuff with callbacks.
+ *
+ * Callbacks follow the Node.js convention. They expect an error or null as
+ * the first argument and an optional value as the second:
+ *
+ * Fail: callback(new Error('ouch!'));
+ * Return: callback(null, 'some return value');
+ */
 
 listener.then(function (err, values) {
   /*
