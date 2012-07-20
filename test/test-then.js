@@ -201,7 +201,7 @@ test('then', {
 
 
   'should throw if called again': function () {
-    var then= this.then;
+    var then = this.then;
     then(function () {});
 
     assert.throws(function () {
