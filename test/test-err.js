@@ -28,17 +28,24 @@ test('err', {
     this.listener.err('b');
     this.listener.then(spy);
 
-    assert.deepEqual(spy.firstCall.args[0].errors, ['a', 'b']);
+    sinon.assert.calledWithMatch(spy, {
+      errors : ['a', 'b']
+    });
   },
 
 
   'should throw if called after then': function () {
     this.listener.then(function () {});
-    var self = this;
+    var error;
 
-    assert.throws(function () {
-      self.listener.err();
-    }, /^Error: Cannot be called after then$/);
+    try {
+      this.listener.err();
+    } catch (e) {
+      error = e;
+    }
+
+    assert.equal("Error", error.name);
+    assert.equal("Cannot be called after then", error.message);
   }
 
 

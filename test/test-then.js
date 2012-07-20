@@ -202,11 +202,17 @@ test('then', {
 
   'should throw if called again': function () {
     var then = this.then;
+    var error;
     then(function () {});
 
-    assert.throws(function () {
+    try {
       then(function () {});
-    }, /^Error: Cannot be called more than once$/);
+    } catch (e) {
+      error = e;
+    }
+
+    assert.equal('Error', error.name);
+    assert.equal('Cannot be called more than once', error.message);
   }
 
 

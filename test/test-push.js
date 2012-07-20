@@ -46,11 +46,16 @@ test('push', {
 
   'should throw if called after then': function () {
     this.listener.then(function () {});
-    var self = this;
+    var error;
 
-    assert.throws(function () {
-      self.listener.push(1);
-    }, /^Error: Cannot be called after then$/);
+    try {
+      this.listener.push(1);
+    } catch (e) {
+      error = e;
+    }
+
+    assert.equal('Error', error.name);
+    assert.equal('Cannot be called after then', error.message);
   }
 
 

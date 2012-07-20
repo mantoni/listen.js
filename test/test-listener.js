@@ -29,11 +29,16 @@ test('listener', {
 
   'should throw if called after then': function () {
     this.listener.then(function () {});
-    var self = this;
+    var error;
 
-    assert.throws(function () {
-      self.listener();
-    }, /^Error: Cannot be called after then$/);
+    try {
+      this.listener();
+    } catch (e) {
+      error = e;
+    }
+
+    assert.equal('Error', error.name);
+    assert.equal('Cannot be called after then', error.message);
   }
 
 
