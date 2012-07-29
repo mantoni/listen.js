@@ -12,6 +12,7 @@ var assert    = require('assert');
 var sinon     = require('sinon');
 
 var listen    = require('../lib/listen');
+var ErrorList = require('../lib/error-list');
 
 
 test('err', {
@@ -30,6 +31,19 @@ test('err', {
 
     sinon.assert.calledWithMatch(spy, {
       errors : ['a', 'b']
+    });
+  },
+
+
+  'should add error-list to error-list for then-callback': function () {
+    var spy = sinon.spy();
+
+    this.listener.err('a');
+    this.listener.err(new ErrorList(['b', 'c']));
+    this.listener.then(spy);
+
+    sinon.assert.calledWithMatch(spy, {
+      errors : ['a', 'b', 'c']
     });
   },
 
