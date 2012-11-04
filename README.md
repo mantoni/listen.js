@@ -44,12 +44,20 @@ listener.then(function (err, values) {
 
 ## API
 
- - `listen()` - creates a new listener.
- - `listen(values)` - creates a new listener with initial values. The given argument must be an array.
- - `listener()` - creates a new callback associated with the listener. Throws if called after `then`.
- - `listener.then(func)` - invokes the given function once all callbacks where invoked. Throws if already called.
- - `listener.push(value)` - pushes a value to the internal values array. Throws if called after `then`.
- - `listener.err(error)` - adds an error to the internal error list. Throws if called after `then`.
+#### `listen([values])`
+Creates and returns a new listener. The values array with initial values is optional.
+
+#### `listener([timeout])`
+Creates a new callback associated with the listener. If the optional timeout is given, the listener errs with a `TimeoutError` if the callback was not invoked. Throws if called after `then`.
+
+#### `listener.then(func)`
+Invokes the given function once all callbacks where invoked. If none of the callbacks had errors, the first argument is `null`, otherwise it's an `Error`. The second argument is the values array in order of callback creation. Can only be called once.
+
+#### `listener.push(value)`
+Pushes a value to the internal values array. Throws if called after `then`.
+
+#### `listener.err(error)`
+Adds an error to the internal error list. Throws if called after `then`.
 
 ## Run tests
 
@@ -57,10 +65,18 @@ listener.then(function (err, values) {
 make
 ```
 
-## Compile for browsers and minify
+## Hacking
 
-This requires [nomo.js](https://github.com/mantoni/nomo.js).
+If you'd like to hack listen.js here is how to get started:
 
-```
-make compile
-```
+ - `npm install` will setup everything you need.
+ - `make` lints the code with JSLint and runs all unit tests.
+ - Use can also `make lint` or `make test` individually.
+
+Running the test cases in a browser instead of Node requires [nomo.js](https://github.com/mantoni/nomo.js).
+
+ - Run `npm install -g nomo`
+ - Run `nomo server` from within the project directory.
+ - Open http://localhost:4444/test in your browser.
+
+To build a browser package containing the merged / minified scripts run `make package`.
