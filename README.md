@@ -10,6 +10,11 @@ Wait for the results of multiple callbacks.
 npm install listen
 ```
 
+## Download for browsers
+
+Browser package are here: http://maxantoni.de/listen.js/
+
+
 ## Usage
 
 ```js
