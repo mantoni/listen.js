@@ -118,7 +118,103 @@ test('listener', {
     sinon.assert.calledWithMatch(spy, {
       name : 'TimeoutError'
     });
-  }
+  },
 
+
+  'should invoke given function': function () {
+    var spy      = sinon.spy();
+    var callback = this.listener(spy);
+
+    callback();
+
+    sinon.assert.calledOnce(spy);
+  },
+
+
+  'should pass error to callback': function () {
+    var spy      = sinon.spy();
+    var callback = this.listener(spy);
+    var err      = new Error();
+
+    callback(err);
+
+    sinon.assert.calledWith(spy, err);
+  },
+
+
+  'should pass null and value to callback': function () {
+    var spy      = sinon.spy();
+    var callback = this.listener(spy);
+
+    callback(null, 'some value');
+
+    sinon.assert.calledWith(spy, null, 'some value');
+  },
+
+
+  'should allow to combine function and timeout arguments': function () {
+    var spy      = sinon.spy();
+    var callback = this.listener(spy, 250);
+
+    this.clock.tick(250);
+
+    sinon.assert.calledWithMatch(spy, {
+      name : 'TimeoutError'
+    });
+  },
+
+
+  'should invoke given function before resolving the listener': function () {
+    var spy1     = sinon.spy();
+    var spy2     = sinon.spy();
+    var callback = this.listener(spy1);
+    this.listener.then(spy2);
+
+    callback();
+
+    sinon.assert.callOrder(spy1, spy2);
+  },
+
+
+  'should pass error thrown in given function to then': function () {
+    var err      = new Error('ouch');
+    var callback = this.listener(sinon.stub().throws(err));
+    var spy      = sinon.spy();
+    this.listener.then(spy);
+
+    callback();
+
+    sinon.assert.calledWith(spy, err);
+  },
+
+
+  'should combine error thrown in given function with err passed to callback':
+    function () {
+      var err1      = new Error('ouch');
+      var err2      = new Error('oh noes');
+      var callback = this.listener(sinon.stub().throws(err1));
+      var spy      = sinon.spy();
+      this.listener.then(spy);
+
+      callback(err2);
+
+      sinon.assert.calledWithMatch(spy, {
+        name   : 'ErrorList',
+        errors : [err1, err2]
+      });
+    },
+
+
+  'should not create an error list if the given function re-throws the error':
+    function () {
+      var err      = new Error('ouch');
+      var callback = this.listener(function (e) { throw e; });
+      var spy      = sinon.spy();
+      this.listener.then(spy);
+
+      callback(err);
+
+      sinon.assert.calledWith(spy, err);
+    }
 
 });

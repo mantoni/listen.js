@@ -55,6 +55,9 @@ Creates and returns a new listener. The values array with initial values is opti
 #### `listener([timeout])`
 Creates a new callback associated with the listener. If the optional timeout is given, the listener errs with a `TimeoutError` if the callback was not invoked. Throws if called after `then`.
 
+#### `listener(func[, timeout])`
+Creates a new callback which passes the arguments to the given function. Can be combined with an optional timeout. Throws if called after `then`.
+
 #### `listener.then(func)`
 Invokes the given function once all callbacks where invoked. If none of the callbacks had errors, the first argument is `null`, otherwise it's an `Error`. The second argument is the values array in order of callback creation. Can only be called once.
 
