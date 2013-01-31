@@ -24,8 +24,8 @@ test('then', {
 
 
   'should require function argument': function () {
-    var re    = /^TypeError: Function expected$/;
-    var then  = this.then;
+    var re   = /^TypeError: Function expected$/;
+    var then = this.then;
 
     assert.throws(function () {
       then(null);
@@ -72,8 +72,8 @@ test('then', {
 
 
   'should invoke given function if callback was already called': function () {
-    var spy       = sinon.spy();
-    var callback  = this.listener();
+    var spy      = sinon.spy();
+    var callback = this.listener();
 
     callback();
     this.then(spy);
@@ -83,8 +83,8 @@ test('then', {
 
 
   'should invoke given function after callback was called': function () {
-    var spy       = sinon.spy();
-    var callback  = this.listener();
+    var spy      = sinon.spy();
+    var callback = this.listener();
 
     this.then(spy);
     callback();
@@ -109,8 +109,8 @@ test('then', {
 
   'should invoke given function with null and empty array after callback':
     function () {
-      var spy       = sinon.spy();
-      var callback  = this.listener();
+      var spy      = sinon.spy();
+      var callback = this.listener();
 
       this.then(spy);
       callback();
@@ -120,8 +120,8 @@ test('then', {
 
 
   'should pass callback argument to given function': function () {
-    var spy       = sinon.spy();
-    var callback  = this.listener();
+    var spy      = sinon.spy();
+    var callback = this.listener();
 
     callback(null, 123);
     this.then(spy);
