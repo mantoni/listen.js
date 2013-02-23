@@ -1,10 +1,12 @@
 # listen.js
 
-Wait for the results of multiple callbacks.
+Wait for the results of multiple callbacks
+
+Repository: https://github.com/mantoni/listen.js
 
 [![Build Status](https://secure.travis-ci.org/mantoni/listen.js.png?branch=master)](http://travis-ci.org/mantoni/listen.js)
 
-## Install
+## Install on Node
 
 ```
 npm install listen
@@ -73,10 +75,11 @@ Adds an error to the internal error list. Throws if called after `then`.
 make
 ```
 
-## Hacking
+## Contrubuting
 
-If you'd like to hack listen.js here is how to get started:
+If you'd like to contribute to listen.js here is how to get started:
 
+ - Fork the project on GitHub.
  - `npm install` will setup everything you need.
  - `make` lints the code with JSLint and runs all unit tests.
  - Use can also `make lint` or `make test` individually.
