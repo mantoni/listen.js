@@ -113,7 +113,7 @@ test('then', {
       var callback = this.listener();
 
       this.then(spy);
-      callback();
+      callback(); // undefined value is ignored.
 
       sinon.assert.calledWith(spy, null, []);
     },
@@ -168,6 +168,51 @@ test('then', {
     this.then(spy);
 
     sinon.assert.calledWith(spy, null, [false, true]);
+  },
+
+
+  'should not pass undefined from first value': function () {
+    var spy       = sinon.spy();
+
+    var callbackA = this.listener();
+    var callbackB = this.listener();
+    var callbackC = this.listener();
+    callbackA();
+    callbackB(null, 'B');
+    callbackC(null, 'C');
+    this.then(spy);
+
+    sinon.assert.calledWith(spy, null, ['B', 'C']);
+  },
+
+
+  'should not pass undefined from second value': function () {
+    var spy       = sinon.spy();
+
+    var callbackA = this.listener();
+    var callbackB = this.listener();
+    var callbackC = this.listener();
+    callbackA(null, 'A');
+    callbackB();
+    callbackC(null, 'C');
+    this.then(spy);
+
+    sinon.assert.calledWith(spy, null, ['A', 'C']);
+  },
+
+
+  'should not pass undefined from third value': function () {
+    var spy       = sinon.spy();
+
+    var callbackA = this.listener();
+    var callbackB = this.listener();
+    var callbackC = this.listener();
+    callbackA(null, 'A');
+    callbackB(null, 'B');
+    callbackC();
+    this.then(spy);
+
+    sinon.assert.calledWith(spy, null, ['A', 'B']);
   },
 
 
