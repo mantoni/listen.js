@@ -1,6 +1,6 @@
 {
   "name"            : "listen",
-  "version"         : "0.3.0",
+  "version"         : "0.3.1",
   "description"     : "Wait for the results of multiple callbacks",
   "author"          : "Maximilian Antoni (http://maxantoni.de)",
   "homepage"        : "https://github.com/mantoni/listen.js",
