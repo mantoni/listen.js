@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <pre id="out"></pre>
+    <script>
+      var out = document.getElementById('out');
+      var log = console.log;
+      console.log = function (msg) {
+        log.call(console, msg);
+        out.appendChild(document.createTextNode(msg + '\n'));
+      };
+    </script>
+    <script src="test.js"></script>
+  </body>
+</html>

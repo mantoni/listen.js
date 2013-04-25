@@ -9,7 +9,16 @@ lint:
 test:
 	@node -e "require('urun')('test');"
 
-compile: lint test
+browserify-test:
+	@browserify support/browserify.js $(shell ls test/test-*) -o support/test.js
+
+browser: browserify-test
+	@open support/test.html
+
+phantom: browserify-test
+	@phantomjs support/phantom.js
+
+compile: lint test phantom
 	@nomo
 	@node_modules/.bin/uglifyjs listen.js > listen.min.js
 
