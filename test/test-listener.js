@@ -1,17 +1,17 @@
-/**
+/*
  * listen.js
  *
- * Copyright (c) 2012 Maximilian Antoni <mail@maxantoni.de>
+ * Copyright (c) 2012-2013 Maximilian Antoni <mail@maxantoni.de>
  *
  * @license MIT
  */
 'use strict';
 
-var test      = require('utest');
-var assert    = require('assert');
-var sinon     = require('sinon');
+var test   = require('utest');
+var assert = require('assert');
+var sinon  = require('sinon');
 
-var listen    = require('../lib/listen');
+var listen = require('../lib/listen');
 
 
 test('listener', {
