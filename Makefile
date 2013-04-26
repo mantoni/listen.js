@@ -19,7 +19,7 @@ phantom: browserify-test
 	@phantomjs support/phantom.js
 
 compile: lint test phantom
-	@nomo
+	@browserify lib/listen.js -s listen -o listen.js
 	@node_modules/.bin/uglifyjs listen.js > listen.min.js
 
 version := $(shell node -e "console.log(require('./package.json').version)")

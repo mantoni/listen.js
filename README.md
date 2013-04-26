@@ -1,10 +1,9 @@
-# listen.js
+# listen.js [![Build Status](https://secure.travis-ci.org/mantoni/listen.js.png?branch=master)](http://travis-ci.org/mantoni/listen.js)
 
 Wait for the results of multiple callbacks
 
 Repository: https://github.com/mantoni/listen.js
 
-[![Build Status](https://secure.travis-ci.org/mantoni/listen.js.png?branch=master)](http://travis-ci.org/mantoni/listen.js)
 
 ## Install on Node
 
@@ -14,7 +13,9 @@ npm install listen
 
 ## Download for browsers
 
-Browser package are here: http://maxantoni.de/listen.js/
+Standalone browser package are here: http://maxantoni.de/listen.js/
+However, you may want to use npm and bundle it with your application using
+[Browserify](http://browserify.org).
 
 
 ## Usage
@@ -51,14 +52,23 @@ listener.then(function (err, values) {
 
 ## API
 
-#### `listen([values])`
-Creates and returns a new listener. The values array with initial values is optional.
+#### `listen()`
+Creates and returns a new listener function.
 
-#### `listener([timeout])`
-Creates a new callback associated with the listener. If the optional timeout is given, the listener errs with a `TimeoutError` if the callback was not invoked. Throws if called after `then`.
+#### `listen(values)`
+Creates and returns a new listener with the given initial values.
 
-#### `listener(func[, timeout])`
-Creates a new callback which passes the arguments to the given function. Can be combined with an optional timeout. Throws if called after `then`.
+#### `listener()`
+Creates a new callback associated with the listener. Throws if called after `then`.
+
+#### `listener(timeout)`
+Creates a new callback that errs with a `TimeoutError` if the callback was not invoked within the given timeout.
+
+#### `listener(func)`
+Creates a new callback that also invokes the given function with `(err, value)`.
+
+#### `listener(func, timeout)`
+Combined `listener(func)` and `listener(timeout)`.
 
 #### `listener.then(func)`
 Invokes the given function once all callbacks where invoked. If none of the callbacks had errors, the first argument is `null`, otherwise it's an `Error`. The second argument is the values array in order of callback creation. Can only be called once.
@@ -69,13 +79,33 @@ Pushes a value to the internal values array. Throws if called after `then`.
 #### `listener.err(error)`
 Adds an error to the internal error list. Throws if called after `then`.
 
-## Run tests
+## Lint sources and run tests
 
 ```
 make
 ```
 
-## Contrubuting
+## Run tests in Phantom.JS
+
+This requires [Phantom.JS](http://phantomjs.org) and [Browserify](http://browserify.org).
+
+```
+make phantom
+```
+
+
+## Run tests in a browser
+
+This requires [Browserify](http://browserify.org).
+
+```
+make browser
+```
+
+If you are not on Mac OS this will fail to open the browser URL (`support/test.html`).
+
+
+## Contributing
 
 If you'd like to contribute to listen.js here is how to get started:
 
@@ -83,11 +113,5 @@ If you'd like to contribute to listen.js here is how to get started:
  - `npm install` will setup everything you need.
  - `make` lints the code with JSLint and runs all unit tests.
  - Use can also `make lint` or `make test` individually.
-
-Running the test cases in a browser instead of Node requires [nomo.js](https://github.com/mantoni/nomo.js).
-
- - Run `npm install -g nomo`
- - Run `nomo server` from within the project directory.
- - Open http://localhost:4444/test in your browser.
 
 To build a browser package containing the merged / minified scripts run `make package`.
