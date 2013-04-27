@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html><body style="">
+<style>
+  body {
+    background-color: #1b1b1b;
+    color: #dadada;
+    font-size: 14px;
+    line-height: 20px;
+  }
+</style>
+<script>
+(function () {
+  var body   = document.body;
+  var log    = console.log;
+  var info   = console.info;
+  var warn   = console.warn;
+  var error  = console.error;
+  var toHtml = function (color) {
+    return function () {
+      var code = document.createElement('pre');
+      var text = Array.prototype.join.call(arguments, ' ');
+      code.style.color = color;
+      code.appendChild(document.createTextNode(text));
+      body.appendChild(code);
+    };
+  };
+  console.log   = toHtml('#dadada');
+  console.info  = toHtml('#62b1c5');
+  console.warn  = toHtml('#fdcc82');
+  console.error = toHtml('#cc494b');
+}());
+

@@ -7,7 +7,9 @@ process.stdout = {
   write : function (s) { console.log(s.replace(/\n$/, ''));  }
 };
 // utest uses this undocumented node feature:
-process.reallyExit = function () {};
+process.reallyExit = function (code) {
+  console.error(''); // log an empty error so that phantomic fails
+};
 
 // https://github.com/ariya/phantomjs/issues/10522
 if (!Function.prototype.bind) {

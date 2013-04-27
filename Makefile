@@ -9,21 +9,21 @@ lint:
 test:
 	@node -e "require('urun')('test');"
 
-browserify-test:
-	@browserify support/browserify.js $(shell ls test/test-*) -o support/test.js
+phantom:
+	@browserify test/fixture/browserify.js `ls test/test-*` | node_modules/.bin/phantomic
 
-browser: browserify-test
-	@open support/test.html
-
-phantom: browserify-test
-	@phantomjs support/phantom.js
+browser:
+	@cp test/fixture/test-pre.html test/all.html
+	@browserify test/fixture/browserify.js `ls test/test-*` >> test/all.html
+	@cat test/fixture/test-post.html >> test/all.html
+	@open test/all.html
 
 compile: lint test phantom
 	@browserify lib/listen.js -s listen -o listen.js
 	@node_modules/.bin/uglifyjs listen.js > listen.min.js
 
-version := $(shell node -e "console.log(require('./package.json').version)")
-folder := listen-${version}
+version = $(shell node -e "console.log(require('./package.json').version)")
+folder  = listen-${version}
 
 package: compile
 	@echo "Creating package ${folder}.tgz"

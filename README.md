@@ -102,7 +102,7 @@ This requires [Browserify](http://browserify.org).
 make browser
 ```
 
-If you are not on Mac OS this will fail to open the browser URL (`support/test.html`).
+If you are not on Mac OS this will fail to open the browser URL (`test/all.html`).
 
 
 ## Contributing
