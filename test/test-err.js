@@ -58,8 +58,8 @@ test('err', {
       error = e;
     }
 
-    assert.equal("Error", error.name);
-    assert.equal("Cannot be called after then", error.message);
+    assert.equal('Error', error.name);
+    assert.equal('Cannot be called after then', error.message);
   }
 
 

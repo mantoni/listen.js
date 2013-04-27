@@ -5,7 +5,7 @@ Wait for the results of multiple callbacks
 Repository: https://github.com/mantoni/listen.js
 
 
-## Install on Node
+## Install with NPM
 
 ```
 npm install listen
@@ -79,39 +79,16 @@ Pushes a value to the internal values array. Throws if called after `then`.
 #### `listener.err(error)`
 Adds an error to the internal error list. Throws if called after `then`.
 
-## Lint sources and run tests
-
-```
-make
-```
-
-## Run tests in Phantom.JS
-
-This requires [Phantom.JS](http://phantomjs.org) and [Browserify](http://browserify.org).
-
-```
-make phantom
-```
-
-
-## Run tests in a browser
-
-This requires [Browserify](http://browserify.org).
-
-```
-make browser
-```
-
-If you are not on Mac OS this will fail to open the browser URL (`test/all.html`).
-
 
 ## Contributing
 
-If you'd like to contribute to listen.js here is how to get started:
+Here is what you need for development:
 
- - Fork the project on GitHub.
- - `npm install` will setup everything you need.
- - `make` lints the code with JSLint and runs all unit tests.
- - Use can also `make lint` or `make test` individually.
+ - `npm install` will install all the dev dependencies
+ - `make` does all of the following
+ - `make lint` lint the code with JSLint
+ - `make test` runs all unit tests in Node
+ - `make browser` generates a static web page at `test/all.html` to run the tests in a browser.
+ - `make phantom` runs all tests in a the headless [Phantom.JS](http://phantomjs.org). Make sure you have `phantomjs` in your path.
 
 To build a browser package containing the merged / minified scripts run `make package`.

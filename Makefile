@@ -1,6 +1,10 @@
 SHELL := /bin/bash
 
-default: lint test
+default: lint test phantom browser
+
+bin   = node_modules/.bin
+tests = ./test/fixture/utest.js `ls ./test/test-*`
+html  = test/all.html
 
 lint:
 	@node_modules/.bin/autolint --once
@@ -10,17 +14,14 @@ test:
 	@node -e "require('urun')('test');"
 
 phantom:
-	@browserify test/fixture/browserify.js `ls test/test-*` | node_modules/.bin/phantomic
+	@${bin}/browserify ${tests} | ${bin}/phantomic
 
 browser:
-	@cp test/fixture/test-pre.html test/all.html
-	@browserify test/fixture/browserify.js `ls test/test-*` >> test/all.html
-	@cat test/fixture/test-post.html >> test/all.html
-	@open test/all.html
+	@${bin}/consolify ${tests} > ${html}
 
-compile: lint test phantom
-	@browserify lib/listen.js -s listen -o listen.js
-	@node_modules/.bin/uglifyjs listen.js > listen.min.js
+compile: lint test phantom browser
+	@${bin}/browserify lib/listen.js -s listen -o listen.js
+	@${bin}/uglifyjs listen.js > listen.min.js
 
 version = $(shell node -e "console.log(require('./package.json').version)")
 folder  = listen-${version}
@@ -30,6 +31,7 @@ package: compile
 	@mkdir ${folder}
 	@mv listen.js listen.min.js ${folder}
 	@cp LICENSE README.md ${folder}
+	@cp test/all.html ${folder}/tests.html
 	@tar -czf ${folder}.tgz ${folder}
 	@rm -r ${folder}
 
