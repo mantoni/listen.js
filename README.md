@@ -14,6 +14,7 @@ npm install listen
 ## Download for browsers
 
 Standalone browser package are here: http://maxantoni.de/listen.js/
+
 However, you may want to use npm and bundle it with your application using
 [Browserify](http://browserify.org).
 
