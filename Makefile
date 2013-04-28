@@ -2,9 +2,14 @@ SHELL := /bin/bash
 
 default: lint test phantom browser
 
-bin   = node_modules/.bin
-tests = ./test/fixture/utest.js `ls ./test/test-*`
-html  = test/all.html
+name    = "listen"
+bin     = node_modules/.bin
+tests   = ./test/fixture/utest.js `ls ./test/test-*`
+html    = test/all.html
+main    = $(shell node -e "console.log(require('./package.json').main)")
+version = $(shell node -e "console.log(require('./package.json').version)")
+folder  = listen-${version}
+
 
 lint:
 	@node_modules/.bin/autolint --once
@@ -22,17 +27,14 @@ browser:
 	@${bin}/consolify ${tests} > ${html}
 
 compile: lint test phantom browser
-	@${bin}/browserify lib/listen.js -s listen -o listen.js
-	@${bin}/uglifyjs listen.js > listen.min.js
-
-version = $(shell node -e "console.log(require('./package.json').version)")
-folder  = listen-${version}
+	@${bin}/browserify ${main} -s ${name} -o ${name}.js
+	@${bin}/uglifyjs ${name}.js > ${name}.min.js
 
 package: compile
 	@echo "Creating package ${folder}.tgz"
 	@mkdir ${folder}
-	@mv listen.js listen.min.js ${folder}
-	@cp LICENSE README.md ${folder}
+	@mv ${name}.js ${name}.min.js ${folder}
+	@cp LICENSE README.md CHANGES.md ${folder}
 	@cp test/all.html ${folder}/tests.html
 	@tar -czf ${folder}.tgz ${folder}
 	@rm -r ${folder}
