@@ -18,14 +18,14 @@ var ErrorList = require('../lib/error-list');
 test('listen', {
 
 
-  'should return listener function': function () {
+  'returns listener function': function () {
     var listener = listen();
 
     assert.equal(typeof listener, 'function');
   },
 
 
-  'should require given argument to be array': function () {
+  'requires given argument to be array': function () {
     var re = /^TypeError: Array expected$/;
 
     assert.throws(function () {
@@ -47,7 +47,7 @@ test('listen', {
   },
 
 
-  'should append callback value to given value': function () {
+  'appends callback value to given value': function () {
     var spy       = sinon.spy();
     var listener  = listen(['a']);
     var callback  = listener();
@@ -59,7 +59,7 @@ test('listen', {
   },
 
 
-  'should append callback values to given values': function () {
+  'appends callback values to given values': function () {
     var spy       = sinon.spy();
     var listener  = listen(['a', 'b']);
     var callbackA = listener();
@@ -73,7 +73,7 @@ test('listen', {
   },
 
 
-  'should not modify given values array': function () {
+  'does not modify given values array': function () {
     var values    = [];
     var listener  = listen(values);
     var callback  = listener();
@@ -84,7 +84,7 @@ test('listen', {
   },
 
 
-  'should expose ErrorList': function () {
+  'exposes ErrorList': function () {
     assert.strictEqual(listen.ErrorList, ErrorList);
   }
 

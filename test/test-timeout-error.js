@@ -16,14 +16,14 @@ var TimeoutError  = require('../lib/timeout-error');
 test('timeout-error', {
 
 
-  'should be error': function () {
+  'is an error': function () {
     var error = new TimeoutError();
 
     assert(error instanceof Error);
   },
 
 
-  'should be named TimeoutError': function () {
+  'has name TimeoutError': function () {
     var error = new TimeoutError([]);
 
     assert.equal(error.name, 'TimeoutError');

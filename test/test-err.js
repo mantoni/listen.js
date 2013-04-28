@@ -22,7 +22,7 @@ test('err', {
   },
 
 
-  'should add error to error-list for then-callback': function () {
+  'adds error to error-list for then-callback': function () {
     var spy = sinon.spy();
 
     this.listener.err('a');
@@ -35,7 +35,7 @@ test('err', {
   },
 
 
-  'should add error-list to error-list for then-callback': function () {
+  'adds error-list to error-list for then-callback': function () {
     var spy = sinon.spy();
 
     this.listener.err('a');
@@ -48,7 +48,7 @@ test('err', {
   },
 
 
-  'should throw if called after then': function () {
+  'throws if called after then': function () {
     this.listener.then(function () {});
     var error;
 

@@ -21,7 +21,7 @@ test('push', {
   },
 
 
-  'should add value to values for then-callback': function () {
+  'adds value to values for then-callback': function () {
     var spy = sinon.spy();
 
     this.listener.push('a');
@@ -32,7 +32,7 @@ test('push', {
   },
 
 
-  'should add value at second position if callback pending': function () {
+  'adds value at second position if callback pending': function () {
     var spy       = sinon.spy();
     var callback  = this.listener();
 
@@ -44,7 +44,7 @@ test('push', {
   },
 
 
-  'should throw if called after then': function () {
+  'throws if called after then': function () {
     this.listener.then(function () {});
     var error;
 

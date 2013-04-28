@@ -26,14 +26,14 @@ test('listener', {
   },
 
 
-  'should return callback function': function () {
+  'returns callback function': function () {
     var callback = this.listener();
 
     assert.equal(typeof callback, 'function');
   },
 
 
-  'should throw if called after then': function () {
+  'throws if called after then': function () {
     this.listener.then(function () {});
     var error;
 
@@ -48,7 +48,7 @@ test('listener', {
   },
 
 
-  'should err on timeout': function () {
+  'errs on timeout': function () {
     var spy = sinon.spy();
 
     this.listener(1000);
@@ -66,7 +66,7 @@ test('listener', {
   },
 
 
-  'should not set a timeout by default': function () {
+  'does not set a timeout by default': function () {
     var spy = sinon.spy();
 
     this.listener();
@@ -77,7 +77,7 @@ test('listener', {
   },
 
 
-  'should not resolve if waiting for another callback': function () {
+  'does not resolve if waiting for another callback': function () {
     var spy = sinon.spy();
 
     this.listener(1000);
@@ -89,7 +89,7 @@ test('listener', {
   },
 
 
-  'should clear timeout': function () {
+  'clears timeout': function () {
     var spy       = sinon.spy();
     var callback1 = this.listener(250);
     var callback2 = this.listener();
@@ -104,7 +104,7 @@ test('listener', {
   },
 
 
-  'should ignore callback arguments after timeout': function () {
+  'ignores callback arguments after timeout': function () {
     var spy       = sinon.spy();
     var callback1 = this.listener(500);
     var callback2 = this.listener();
@@ -121,7 +121,7 @@ test('listener', {
   },
 
 
-  'should invoke given function': function () {
+  'invokes given function': function () {
     var spy      = sinon.spy();
     var callback = this.listener(spy);
 
@@ -131,7 +131,7 @@ test('listener', {
   },
 
 
-  'should pass error to callback': function () {
+  'passes error to callback': function () {
     var spy      = sinon.spy();
     var callback = this.listener(spy);
     var err      = new Error();
@@ -142,7 +142,7 @@ test('listener', {
   },
 
 
-  'should pass null and value to callback': function () {
+  'passes null and value to callback': function () {
     var spy      = sinon.spy();
     var callback = this.listener(spy);
 
@@ -152,7 +152,7 @@ test('listener', {
   },
 
 
-  'should allow to combine function and timeout arguments': function () {
+  'allows to combine function and timeout arguments': function () {
     var spy      = sinon.spy();
     var callback = this.listener(spy, 250);
 
@@ -164,7 +164,7 @@ test('listener', {
   },
 
 
-  'should invoke given function before resolving the listener': function () {
+  'invokes given function before resolving the listener': function () {
     var spy1     = sinon.spy();
     var spy2     = sinon.spy();
     var callback = this.listener(spy1);
@@ -176,7 +176,7 @@ test('listener', {
   },
 
 
-  'should pass error thrown in given function to then': function () {
+  'passes error thrown in given function to then': function () {
     var err      = new Error('ouch');
     var callback = this.listener(sinon.stub().throws(err));
     var spy      = sinon.spy();
@@ -188,7 +188,7 @@ test('listener', {
   },
 
 
-  'should combine error thrown in given function with err passed to callback':
+  'combines error thrown in given function with err passed to callback':
     function () {
       var err1      = new Error('ouch');
       var err2      = new Error('oh noes');
@@ -205,7 +205,7 @@ test('listener', {
     },
 
 
-  'should not create an error list if the given function re-throws the error':
+  'does not create an error list if the given function re-throws the error':
     function () {
       var err      = new Error('ouch');
       var callback = this.listener(function (e) { throw e; });

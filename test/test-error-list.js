@@ -16,21 +16,21 @@ var ErrorList = require('../lib/error-list');
 test('error-list', {
 
 
-  'should be error': function () {
+  'is an error': function () {
     var error = new ErrorList([]);
 
     assert(error instanceof Error);
   },
 
 
-  'should be named ErrorList': function () {
+  'has name ErrorList': function () {
     var error = new ErrorList([]);
 
     assert.equal(error.name, 'ErrorList');
   },
 
 
-  'should expose given errors': function () {
+  'exposes given errors': function () {
     var errors  = [new TypeError(), new RangeError()];
 
     var error   = new ErrorList(errors);

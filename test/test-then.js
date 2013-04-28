@@ -23,7 +23,7 @@ test('then', {
   },
 
 
-  'should require function argument': function () {
+  'requires function argument': function () {
     var re   = /^TypeError: Function expected$/;
     var then = this.then;
 
@@ -43,7 +43,7 @@ test('then', {
   },
 
 
-  'should invoke given function if no callbacks where created': function () {
+  'invokes given function if no callbacks where created': function () {
     var spy = sinon.spy();
 
     this.then(spy);
@@ -52,7 +52,7 @@ test('then', {
   },
 
 
-  'should invoke given function with null and empty array': function () {
+  'invokes given function with null and empty array': function () {
     var spy = sinon.spy();
 
     this.then(spy);
@@ -61,7 +61,7 @@ test('then', {
   },
 
 
-  'should not invoke given function if callback was created': function () {
+  'does not invoke given function if callback was created': function () {
     var spy = sinon.spy();
 
     this.listener();
@@ -71,7 +71,7 @@ test('then', {
   },
 
 
-  'should invoke given function if callback was already called': function () {
+  'invokes given function if callback was already called': function () {
     var spy      = sinon.spy();
     var callback = this.listener();
 
@@ -82,7 +82,7 @@ test('then', {
   },
 
 
-  'should invoke given function after callback was called': function () {
+  'invokes given function after callback was called': function () {
     var spy      = sinon.spy();
     var callback = this.listener();
 
@@ -93,7 +93,7 @@ test('then', {
   },
 
 
-  'should invoke given function after two callbacks where called':
+  'invokes given function after two callbacks where called':
     function () {
       var spy       = sinon.spy();
       var callbackA = this.listener();
@@ -107,7 +107,7 @@ test('then', {
     },
 
 
-  'should invoke given function with null and empty array after callback':
+  'invokes given function with null and empty array after callback':
     function () {
       var spy      = sinon.spy();
       var callback = this.listener();
@@ -119,7 +119,7 @@ test('then', {
     },
 
 
-  'should pass callback argument to given function': function () {
+  'passes callback argument to given function': function () {
     var spy      = sinon.spy();
     var callback = this.listener();
 
@@ -130,7 +130,7 @@ test('then', {
   },
 
 
-  'should pass arguments from multiple callback to given function':
+  'passes arguments from multiple callback to given function':
     function () {
       var spy       = sinon.spy();
       var callbackA = this.listener();
@@ -144,7 +144,7 @@ test('then', {
     },
 
 
-  'should pass callback arguments in order of callback creation':
+  'passes callback arguments in order of callback creation':
     function () {
       var spy       = sinon.spy();
       var callbackA = this.listener();
@@ -158,7 +158,7 @@ test('then', {
     },
 
 
-  'should not confuse argument order': function () {
+  'does not confuse argument order': function () {
     var spy       = sinon.spy();
 
     var callbackA = this.listener();
@@ -171,7 +171,7 @@ test('then', {
   },
 
 
-  'should not pass undefined from first value': function () {
+  'does not pass undefined from first value': function () {
     var spy       = sinon.spy();
 
     var callbackA = this.listener();
@@ -186,7 +186,7 @@ test('then', {
   },
 
 
-  'should not pass undefined from second value': function () {
+  'does not pass undefined from second value': function () {
     var spy       = sinon.spy();
 
     var callbackA = this.listener();
@@ -201,7 +201,7 @@ test('then', {
   },
 
 
-  'should not pass undefined from third value': function () {
+  'does not pass undefined from third value': function () {
     var spy       = sinon.spy();
 
     var callbackA = this.listener();
@@ -216,7 +216,7 @@ test('then', {
   },
 
 
-  'should pass error to given function': function () {
+  'passes error to given function': function () {
     var spy       = sinon.spy();
     var err       = new RangeError();
     var callback  = this.listener();
@@ -228,7 +228,7 @@ test('then', {
   },
 
 
-  'should pass errors as ErrorList to given function': function () {
+  'passes errors as ErrorList to given function': function () {
     var spy       = sinon.spy();
     var err1      = new RangeError();
     var err2      = new TypeError();
@@ -245,7 +245,7 @@ test('then', {
   },
 
 
-  'should throw if called again': function () {
+  'throws if called again': function () {
     var then = this.then;
     var error;
     then(function () {});
