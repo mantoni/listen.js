@@ -14,9 +14,11 @@ test:
 	@node -e "require('urun')('test');"
 
 phantom:
+	@echo "Browserify tests | phantomic"
 	@${bin}/browserify ${tests} | ${bin}/phantomic
 
 browser:
+	@echo "Consolify tests > file://`pwd`/${html}"
 	@${bin}/consolify ${tests} > ${html}
 
 compile: lint test phantom browser
