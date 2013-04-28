@@ -16,7 +16,7 @@
     "url"           : "https://github.com/mantoni/listen.js.git"
   },
   "devDependencies" : {
-    "utest"         : "git+https://github.com/mantoni/node-utest.git",
+    "utest"         : "~0.0.7",
     "urun"          : "~0.0.6",
     "sinon"         : "~1.6.0",
     "uglify-js"     : "~1.2.6",
