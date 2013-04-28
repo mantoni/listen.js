@@ -2,6 +2,7 @@
   "name"            : "listen",
   "version"         : "0.4.0",
   "description"     : "Wait for the results of multiple callbacks",
+  "keywords"        : ["callback", "thenable"],
   "author"          : "Maximilian Antoni (http://maxantoni.de)",
   "homepage"        : "https://github.com/mantoni/listen.js",
   "main"            : "./lib/listen.js",
@@ -24,5 +25,6 @@
     "phantomic"     : "~0.2.0",
     "browserify"    : ">=2.13 <3",
     "consolify"     : "~0.1.0"
-  }
+  },
+  "files"           : ["lib", "README.md", "CHANGES.md", "LICENSE"]
 }
