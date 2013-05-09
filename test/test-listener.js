@@ -215,6 +215,76 @@ test('listener', {
       callback(err);
 
       sinon.assert.calledWith(spy, err);
-    }
+    },
+
+
+  'makes results available by given name': function () {
+    var callbackA = this.listener('A');
+    var callbackB = this.listener('B');
+    var spy = sinon.spy();
+    this.listener.then(spy);
+
+    callbackA(null, 'My name is A');
+    callbackB(null, 'My name is B');
+
+    sinon.assert.calledWithMatch(spy, null, {
+      A : 'My name is A',
+      B : 'My name is B'
+    });
+  },
+
+
+  'fails with TimeoutError for combined name, function and timeout arguments':
+    function () {
+      var spy      = sinon.spy();
+      var callback = this.listener('name', spy, 250);
+
+      this.clock.tick(250);
+
+      sinon.assert.calledWithMatch(spy, {
+        name : 'TimeoutError'
+      });
+    },
+
+
+  'makes results available by name if combined with function and timeout':
+    function () {
+      var callback = this.listener('name', function () {}, 250);
+      var spy      = sinon.spy();
+      this.listener.then(spy);
+
+      callback(null, 'Success');
+
+      sinon.assert.calledWithMatch(spy, null, {
+        name : 'Success'
+      });
+    },
+
+
+  'fails with TimeoutError for combined name and timeout arguments':
+    function () {
+      var callback = this.listener('name', 250);
+      var spy      = sinon.spy();
+      this.listener.then(spy);
+
+      this.clock.tick(250);
+
+      sinon.assert.calledWithMatch(spy, {
+        name : 'TimeoutError'
+      });
+    },
+
+
+  'makes results available by name if combined with timeout': function () {
+    var callback = this.listener('name', 250);
+    var spy      = sinon.spy();
+    this.listener.then(spy);
+
+    callback(null, 'Success');
+
+    sinon.assert.calledWithMatch(spy, null, {
+      name : 'Success'
+    });
+  }
 
 });

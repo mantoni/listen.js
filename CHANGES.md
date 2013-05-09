@@ -2,6 +2,7 @@
 
 ## v0.4.0
 
+- Named callbacks
 - Using Browserify to create standalone browser module
 - Run tests in Phantom.JS using Browserify and Phantomic
 - Run tests in browsers with a standalone test HTML file generated with Consolify
