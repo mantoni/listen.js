@@ -1,8 +1,8 @@
 {
   "name"            : "listen",
-  "version"         : "0.4.0",
+  "version"         : "1.0.0",
   "description"     : "Wait for the results of multiple callbacks",
-  "keywords"        : ["callback", "thenable"],
+  "keywords"        : ["callback", "thenable", "timeout", "async", "flow"],
   "author"          : "Maximilian Antoni (http://maxantoni.de)",
   "homepage"        : "http://maxantoni.de/projects/listen.js/",
   "main"            : "./lib/listen.js",

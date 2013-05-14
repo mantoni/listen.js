@@ -1,5 +1,10 @@
 # Changes
 
+## v1.0.0
+
+- New documentation page
+- Added link to new project homepage
+
 ## v0.4.0
 
 - Named callbacks
