@@ -1,4 +1,4 @@
-# listen.js [![Build Status](https://secure.travis-ci.org/mantoni/listen.js.png?branch=master)](http://travis-ci.org/mantoni/listen.js)
+# listen.js [![Build Status](https://secure.travis-ci.org/mantoni/listen.js.png?branch=master)](http://travis-ci.org/mantoni/listen.js) [![NPM version](https://badge.fury.io/js/listen.png)](http://badge.fury.io/js/listen)
 
 Wait for the results of multiple callbacks
 
