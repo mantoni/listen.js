@@ -1,18 +1,18 @@
 SHELL := /bin/bash
+PATH  := node_modules/.bin:${PATH}
 
 default: lint test phantom browser
 
 name    = "listen"
-bin     = node_modules/.bin
 tests   = `ls ./test/test-*`
 html    = test/all.html
-main    = $(shell node -e "console.log(require('./package.json').main)")
-version = $(shell node -e "console.log(require('./package.json').version)")
-folder  = listen-${version}
+main    = $(shell node -p "require('./package.json').main")
+version = $(shell node -p "require('./package.json').version")
+folder  = ${name}-${version}
 
 
 lint:
-	@node_modules/.bin/autolint --once
+	@autolint --once
 
 .PHONY: test
 test:
@@ -20,15 +20,15 @@ test:
 
 phantom:
 	@echo "Browserify tests | phantomic"
-	@${bin}/browserify ${tests} | ${bin}/phantomic
+	@browserify ${tests} | phantomic
 
 browser:
 	@echo "Consolify tests > file://`pwd`/${html}"
-	@${bin}/consolify --reload -o ${html} ${tests}
+	@consolify --reload -o ${html} ${tests}
 
 compile: lint test phantom browser
-	@${bin}/browserify ${main} -s ${name} -o ${name}.js
-	@${bin}/uglifyjs ${name}.js > ${name}.min.js
+	@browserify ${main} -s ${name} -o ${name}.js
+	@uglifyjs ${name}.js > ${name}.min.js
 
 package: compile
 	@echo "Creating package ${folder}.tgz"
