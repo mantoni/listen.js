@@ -5,29 +5,25 @@
  *
  * @license MIT
  */
+/*global describe, it*/
 'use strict';
 
-var test          = require('utest');
-var assert        = require('assert');
-
+var assert = require('assert');
 var TimeoutError  = require('../lib/timeout-error');
 
 
-test('timeout-error', {
+describe('timeout-error', function () {
 
-
-  'is an error': function () {
+  it('is an error', function () {
     var error = new TimeoutError();
 
     assert(error instanceof Error);
-  },
+  });
 
-
-  'has name TimeoutError': function () {
+  it('has name TimeoutError', function () {
     var error = new TimeoutError([]);
 
     assert.equal(error.name, 'TimeoutError');
-  }
-
+  });
 
 });

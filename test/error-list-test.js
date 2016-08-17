@@ -5,38 +5,33 @@
  *
  * @license MIT
  */
+/*global describe, it, beforeEach*/
 'use strict';
 
-var test      = require('utest');
-var assert    = require('assert');
-
+var assert = require('assert');
 var ErrorList = require('../lib/error-list');
 
 
-test('error-list', {
+describe('error-list', function () {
 
-
-  'is an error': function () {
+  it('is an error', function () {
     var error = new ErrorList([]);
 
     assert(error instanceof Error);
-  },
+  });
 
-
-  'has name ErrorList': function () {
+  it('has name ErrorList', function () {
     var error = new ErrorList([]);
 
     assert.equal(error.name, 'ErrorList');
-  },
+  });
 
+  it('exposes given errors', function () {
+    var errors = [new TypeError(), new RangeError()];
 
-  'exposes given errors': function () {
-    var errors  = [new TypeError(), new RangeError()];
-
-    var error   = new ErrorList(errors);
+    var error = new ErrorList(errors);
 
     assert.strictEqual(error.errors, errors);
-  }
-
+  });
 
 });
