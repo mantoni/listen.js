@@ -1,6 +1,6 @@
 {
   "name": "listen",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Wait for the results of multiple callbacks",
   "keywords": [
     "callback",
