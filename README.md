@@ -74,7 +74,7 @@ create listeners. Use the listeners to create callbacks.
 
 The `listen` has 100% coverage and runs in these environments:
 
-- Node 0.6, 0.8, 0.10, 0.12, 4.3 & 6.3
+- Node 0.10, 0.12, 4.3 & 6.3
 - IE 9, 10, 11
 - Firefox
 - Chore

@@ -13,7 +13,7 @@
   "homepage": "http://maxantoni.de/projects/listen.js/",
   "main": "./lib/listen.js",
   "engines": {
-    "node": ">=0.6"
+    "node": ">=0.10"
   },
   "scripts": {
     "watch": "mochify --watch",
@@ -28,10 +28,10 @@
     "url": "https://github.com/mantoni/listen.js.git"
   },
   "devDependencies": {
-    "jslint": ">=0.8.1 <0.9",
-    "mocha": ">=2.5.3 <3",
-    "mochify": ">=2.18.1 <3",
-    "sinon": ">=1.17.5 <2"
+    "jslint": "^0.8.1",
+    "mocha": "^2.5.3",
+    "mochify": "^2.18.1",
+    "sinon": "^1.17.5"
   },
   "files": [
     "lib",
