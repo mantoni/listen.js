@@ -1,36 +1,75 @@
-# listen.js [![Build Status](https://secure.travis-ci.org/mantoni/listen.js.png?branch=master)](http://travis-ci.org/mantoni/listen.js) [![NPM version](https://badge.fury.io/js/listen.png)](http://badge.fury.io/js/listen)
+# listen.js
 
-Wait for the results of multiple callbacks
+[![Build Status]](https://travis-ci.org/mantoni/listen.js)
+[![SemVer]](http://semver.org)
+[![License]](https://github.com/mantoni/listen.js/blob/master/LICENSE)
 
-Homepage: <http://maxantoni.de/projects/listen.js/>
+A tiny library to wait for the results of multiple callbacks, for node and the
+browsers.
 
-Repository: <https://github.com/mantoni/listen.js>
+## Install
 
----
-
-## Install with NPM
+This will install the `listen` module in your current project and add it to the
+`dependencies`:
 
 ```
-npm install listen
+npm install listen --save
 ```
 
-## Download for browsers
+## Usage
 
-Standalone browser package are here: <http://maxantoni.de/listen.js/>
+```js
+var listen = require('listen');
 
-You can also use npm and bundle it with your application using
-[Browserify](http://browserify.org).
+var listener = listen();
 
+var callbackA = listener();
+var callbackB = listener();
 
-## Development
+/*
+ * Do async stuff with callbacks.
+ *
+ * Callbacks follow the Node.js convention. They expect an error or null as
+ * the first argument and an optional value as the second:
+ *
+ * Fail: callback(new Error('ouch!'));
+ * Return: callback(null, 'some return value');
+ */
+listener.then(function (err, values) {
+  /*
+   * err    - 1) null if no callback received an error
+   *          2) the error of the callback that received an error
+   *          3) an error with name ErrorList wrapping multiple errors
+   *
+   * values - The non-undefined return values from all callbacks in order of
+   *          callback creation, also exposing names callbacks (see API)
+   */
+});
+```
 
-Here is what you need:
+# API
 
- - `npm install` will install all the dev dependencies
- - `make` does all of the following
- - `make lint` lint the code with JSLint
- - `make test` runs all unit tests in Node
- - `make browser` generates a static web page at `test/all.html` to run the tests in a browser.
- - `make phantom` runs all tests in a the headless [Phantom.JS](http://phantomjs.org). Make sure you have `phantomjs` in your path.
+Start with `var listen = require('listen')`, then use the `listen` function to
+create listeners. Use the listeners to create callbacks.
 
-To build a browser package containing the merged / minified scripts run `make package`.
+- `listen([values])`: Creates and returns a new listener function. If `values`
+  are given, it must be an array with initial values.
+- `listener([name][, func][, timeout])`: Creates a new callback associated with
+  the listener. Throws if called after `then`. All arguments are optional and
+  can be combined.
+    - `name` exposes the return value of the callback on the values object
+      under that name.
+    - `func` gets invoked with `(err, value)` when the callback is invoked.
+    - `timeout` calls the callback with a `TimeoutError` after the timeout.
+- `listener.then(func)`: Invokes the given function once all callbacks where
+  invoked. If none of the callbacks had errors, the first argument is `null`,
+  otherwise it's an `Error`. The second argument is the values array in order
+  of callback creation. Can only be called once.
+- `listener.push(value)`: Pushes a value to the internal values array. Throws
+  if called after `then`.
+- `listener.err(error)`: Adds an error to the internal error list. Throws if
+  called after `then`.
+
+[Build Status]: http://img.shields.io/travis/mantoni/listen.js.svg
+[SemVer]: http://img.shields.io/:semver-%E2%9C%93-brightgreen.svg
+[License]: http://img.shields.io/npm/l/listen.svg
