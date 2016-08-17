@@ -4,8 +4,8 @@
 [![SemVer]](http://semver.org)
 [![License]](https://github.com/mantoni/listen.js/blob/master/LICENSE)
 
-A tiny library to wait for the results of multiple callbacks, for node and the
-browsers.
+A tiny library to wait for the results of multiple callbacks. For node and the
+browser.
 
 ## Install
 
@@ -69,6 +69,20 @@ create listeners. Use the listeners to create callbacks.
   if called after `then`.
 - `listener.err(error)`: Adds an error to the internal error list. Throws if
   called after `then`.
+
+## Compatibility
+
+The `listen` has 100% coverage and runs in these environments:
+
+- Node 0.6, 0.8, 0.10, 0.12, 4.3 & 6.3
+- IE 9, 10, 11
+- Firefox
+- Chore
+- PhantomJS
+
+## License
+
+MIT
 
 [Build Status]: http://img.shields.io/travis/mantoni/listen.js.svg
 [SemVer]: http://img.shields.io/:semver-%E2%9C%93-brightgreen.svg
